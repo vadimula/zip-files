@@ -1,5 +1,5 @@
 from zipfile import ZipFile
 
-zip_file = open('test.zip')
-
-zip_file.close()
+with ZipFile('workbook.zip') as file:
+    qtty = [True for elem in file.infolist() if not elem.is_dir()]
+    print(len(qtty))
