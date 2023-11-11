@@ -2,10 +2,11 @@
 # Если в функцию не передано ни одного названия файла для извлечения, то функция должна извлечь все файлы из архива.
 from zipfile import ZipFile
 
-file_names = ['aaa.txt', 'bbb.txt', 'ccc.txt']
+files = ['aaa.txt', 'bbb.txt', 'ccc.txt']
 arch_name = 'files.zip'
-def extract_this(file_names, arch_name):
-    with ZipFile(arch_name, mode='w') as zip_file:
-        [zip_file.write(name) for name in file_names]
+def extract_this(arch_name, *files):
+    with ZipFile(arch_name, 'r') as archive:
+        if files: [archive.extract(name) for name in files]
+        else: archive.extractall()
 
-extract_this(file_names, arch_name)
+extract_this(arch_name)
